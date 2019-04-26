@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "close enough": "cpp",
+        "classic stars": "cpp",
+        "tallest count": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}

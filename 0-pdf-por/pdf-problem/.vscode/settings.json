@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "array": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "initializer_list": "cpp",
+        "cstdlib": "cpp",
+        "iostream": "cpp",
+        "iosfwd": "cpp"
+    }
+}
