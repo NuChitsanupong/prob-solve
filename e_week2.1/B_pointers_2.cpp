@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <iostream>
 using namespace std;
 
@@ -15,4 +16,23 @@ main()
     int z = 3;
     dosomething(&x, y, &z);
     cout << x << " " << y << " " << z << endl;
+=======
+#include <iostream>
+using namespace std;
+
+void dosomething(int *a, int b, int *c)
+{
+    *a += 10;
+    b += 100;
+    *c += 1000;
+}
+
+main()
+{
+    int x = 1;
+    int y = 2;
+    int z = 3;
+    dosomething(&x, y, &z);
+    cout << x << " " << y << " " << z << endl;
+>>>>>>> c46aa179a8a23e5373040e0f81a74ba2ccfabaaf
 }
