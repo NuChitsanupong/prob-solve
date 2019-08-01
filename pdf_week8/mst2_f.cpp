@@ -4,36 +4,31 @@
 
 using namespace std;
 vector<int> set;
-vector<pair<int,pair<int,int>>> sas;
+vector<pair<int, pair<int, int>>> sas;
+unordered_map<int, int> parent;
 int mst = 0;
 
-class DisjointSet
+int Find(int k)
 {
-    unordered_map<int, int> parent;
-
-  public:
-    void makeSet(vector<int> const &set)
+    if (parent[k] == k)
+        return k;
+    return Find(parent[k]);
+}
+void Union(int a, int b, int c)
+{
+    int x = Find(a);
+    int y = Find(b);
+    if (x > y)
     {
-        for (int i : set)
-            parent[i] = i;
+        parent[y] = x;
+        mst += c;
     }
-    int Find(int k)
+    else if (x < y)
     {
-        if (parent[k] == k)
-            return k;
-        return Find(parent[k]);
+        parent[x] = y;
+        mst += c;
     }
-    void Union(int a, int b, int c)
-    {
-        int x = Find(a);
-        int y = Find(b);
-        if (x != y)
-        {
-            mst += c;
-            parent[x] = y;
-        }
-    }
-};
+}
 
 int main()
 {
@@ -42,30 +37,26 @@ int main()
     for (int i = 1; i <= V; i++)
     {
         set.push_back(i);
+        parent[i] = i;
     }
 
-    DisjointSet s;
-
-    s.makeSet(set);
-    
     for (int i = 1; i <= E; i++)
     {
         int x, y, z;
         scanf("%d %d %d", &x, &y, &z);
-        sas.push_back(make_pair(z,make_pair(x,y)));
+        sas.push_back(make_pair(z, make_pair(x, y)));
     }
 
-    sort(sas.begin(),sas.end());
+    sort(sas.begin(), sas.end());
 
     for (int i = 0; i < E; i++)
     {
         int z = sas[i].first;
         int x = sas[i].second.first;
         int y = sas[i].second.second;
-        s.Union(x, y, z);
+        Union(x, y, z);
     }
-
     printf("%d\n", mst);
-    
+
     return 0;
 }

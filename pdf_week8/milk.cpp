@@ -1,37 +1,35 @@
 #include <vector>
 #include <unordered_map>
-#include <algorithm>
 
 using namespace std;
 vector<int> set;
 unordered_map<int, int> parent;
 
+// int Find(int k)
+// {
+//     if (parent[k] == k)
+//         return k;
+//     return Find(parent[k]);
+// }
 int Find(int k)
 {
-    if (parent[k] == k)
-        return k;
-    return Find(parent[k]);
+    while (parent[k] != k)
+    {
+        k = parent[k];
+    }
+    return parent[k];
 }
 void Union(int a, int b)
 {
     int x = Find(a);
     int y = Find(b);
-    if (x != y)
+    if (x < y)
+    {
+        parent[y] = x;
+    }
+    else if (x > y)
     {
         parent[x] = y;
-    }
-}
-bool cycle(int a, int b)
-{
-    int x = Find(a);
-    int y = Find(b);
-    if (x != y)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
     }
 }
 
@@ -44,19 +42,18 @@ int main()
         set.push_back(i);
         parent[i] = i;
     }
-
-    for (int i = 0; i < 2 * E; i++)
+    for (int i = 0; i < E; i++)
     {
         char x;
         int y, z;
-        scanf("%c %d %d", &x, &y, &z);
+        scanf(" %c %d %d", &x, &y, &z);
         if (x == 'c')
         {
             Union(y, z);
         }
         else if (x == 'q')
         {
-            if (cycle(y, z))
+            if (Find(y) == Find(z))
             {
                 printf("yes\n");
             }
@@ -66,6 +63,5 @@ int main()
             }
         }
     }
-
     return 0;
 }
